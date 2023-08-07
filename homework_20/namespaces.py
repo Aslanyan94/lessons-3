@@ -1,24 +1,44 @@
-from pprint import pprint
+def function(b):
+    def second():
+        nonlocal c
+        c += 6
+        print(c)
+    a = 5
+    # global c
+    c = 5
+    second()
 
 
-def function_a():
-    function_var = 4234
-    print("function_a")
-    print("######## locals #########")
+
+    print("the value of variable c is ", c)
+    print("locals: \n", locals())
+    second()
+
+
+def function_2():
+    def sub_function():
+        name = "Company"
+        print(name)
+    # name = "ACA"
+    sub_function()
+
+
+# name = "LLC"
+
+
+c = 6
+
+# print("Globals: \n", globals())
+# print("Locals: \n", locals())
+function("Hiiii")
+# print(c)
+# function_2()
+
+
+
+for i in range(10):
     print(locals())
-    print("#########################")
+    c = i ** 2
 
-
-function_a()
-print(function_var)
-
-a = 5
-h = "fasdasfd"
-ls = []
-s = set([1, 4, 7])
-print("########### globals #########")
-pprint(globals())
-print("#############################")
-pprint(locals())
-
-
+print(i)
+print(c)
