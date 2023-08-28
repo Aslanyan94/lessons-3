@@ -18,15 +18,15 @@ class Date:
 
 
 class Time:
-    def __init__(self, hours, minute, second):
-        self.hours = hours
+    def __init__(self, hour, minute, second):
+        self.hour = hour
         self.minute = minute
         self.second = second
 
     def add_hours(self, hours):
-        self.hours += hours
-        days = self.hours // 24
-        self.hours %= 24
+        self.hour += hours
+        days = self.hour // 24
+        self.hour %= 24
         return days
 
     def add_minutes(self, minutes):
@@ -36,19 +36,28 @@ class Time:
 
     def add_seconds(self, seconds):
         self.second += seconds
-        self.add_minutes(self.second // 60) # second    minute      hour
-        self.second %= 60                   # 3600*25   60 * 25     25
+        self.add_minutes(self.second // 60)     # second    minute      hour
+        self.second %= 60                       # 3600*25   60 * 25     25
 
     def __str__(self):
-        return f"{self.hours}:{self.minute}:{self.second}"
+        return f"{self.hour}:{self.minute}:{self.second}"
 
 
 class DateTime(Date, Time):
-    pass
+    def __init__(self, year, month, day, hour, minute, second):
+        Date.__init__(self, year, month, day)
+        Time.__init__(self, hour=hour, minute=minute, second=second)
 
-    # def __str__(self):
-    #     pass # "23.12.2020 22:53:12"
+    def __str__(self):
+        return f"{self.day}.{self.month}.{self.year} {self.hour:0>2}:{self.minute:0>2}:{self.second:0>2}"
+
+
 # time = Time(hours=1, minute=1, second=1)
 # time.add_seconds(3600 * 23)
 # print(time)
-
+dt = DateTime(year=2023, month=11, day=25,
+              hour=23, minute=3, second=54,)
+print(dt)
+dt.add_minutes(57)
+dt.add_seconds(6)
+print(dt)
